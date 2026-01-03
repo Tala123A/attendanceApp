@@ -1,14 +1,10 @@
 <?php
-
 header('Access-Control-Allow-Origin: *'); 
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
-include "db.php";
 
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit(0);
 
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
-}
 include "db.php";
 
 $result = $conn->query("SELECT id, name, absences FROM students");
@@ -35,4 +31,6 @@ while ($row = $result->fetch_assoc()) {
 
 header('Content-Type: application/json');
 echo json_encode($students);
+
+$conn->close();
 ?>

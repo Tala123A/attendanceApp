@@ -1,10 +1,13 @@
-# Use official PHP image
+# Use official PHP image with CLI
 FROM php:8.2-cli
 
-# Set working directory
+# Install mysqli extension so PHP can connect to MySQL
+RUN docker-php-ext-install mysqli
+
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy all files into container
+# Copy all project files into the container
 COPY . /app
 
 # Expose port 8080
